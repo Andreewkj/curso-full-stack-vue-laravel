@@ -1,26 +1,38 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
 
-  <h2 id="my-app">App</h2>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/products">Products</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <img :src="img" alt="" srcset="">
 
-  <RouterView />
+  <button @click="count++">{{ count }}</button>
+
+  <ul v-for="(user,key) in users">
+    <li>{{key}} - {{ user.name }} with {{ user.age }}</li>
+  </ul>
 </template>
 
-<style scoped>
-#my-app {
-    background-color: aqua;
-}
-</style>
+<script setup>
+import { onMounted, onUpdated, ref, reactive } from 'vue';
+
+const count = ref(0);
+
+const img = 'https://picsum.photos/200';
+
+const users = reactive([
+  {
+    name: 'Andreew',
+    age: 27
+  },
+  {
+    name: 'Jennifer',
+    age: 21
+  }
+])
+
+onMounted(() => {
+  console.log('mounted');
+})
+
+onUpdated(() => {
+  console.log(count.value);
+})
+
+</script>
