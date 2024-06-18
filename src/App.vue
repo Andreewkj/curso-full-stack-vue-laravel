@@ -1,38 +1,22 @@
 <template>
-
-  <img :src="img" alt="" srcset="">
-
-  <button @click="count++">{{ count }}</button>
-
-  <ul v-for="(user,key) in users">
-    <li>{{key}} - {{ user.name }} with {{ user.age }}</li>
+  <ul v-for="user in users.users">
+    <li>{{ user.firstName }}</li>
   </ul>
 </template>
 
 <script setup>
-import { onMounted, onUpdated, ref, reactive } from 'vue';
+import http from '@/services/http.js';
+import { onMounted, reactive } from 'vue';
 
-const count = ref(0);
+let users = reactive({users:[]})
 
-const img = 'https://picsum.photos/200';
-
-const users = reactive([
-  {
-    name: 'Andreew',
-    age: 27
-  },
-  {
-    name: 'Jennifer',
-    age: 21
+onMounted(async () => {
+  try {
+    const {data} = await http.get('api/users');
+    users.users = data;
+  } catch (error) {
+    console.log(error);
   }
-])
-
-onMounted(() => {
-  console.log('mounted');
-})
-
-onUpdated(() => {
-  console.log(count.value);
 })
 
 </script>
