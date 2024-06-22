@@ -12,6 +12,8 @@
   <ul>
     <template v-for="(user, index) in usersIsNotAdmin" :key="index">
       <li> {{ user.firstName }}</li>
+      <Profile :favoriteColor="user.favoriteColor" :moto="user.moto"/>
+
     </template>
   </ul>
 
@@ -19,6 +21,7 @@
 
 <script setup>
 import { computed, reactive, ref } from "vue";
+import Profile from "@/components/Profile.vue"
 
 const user = reactive({
     firstName: 'Andreew',
@@ -33,7 +36,9 @@ const users = reactive([
   },
   {
     firstName:'Anne',
-    is_admin:0
+    is_admin:0,
+    favoriteColor: 'black',
+    moto: 'Yamaha MT 03'
   },
   {
     firstName:'Mary',
@@ -41,7 +46,9 @@ const users = reactive([
   },
   {
     firstName:'James',
-    is_admin:0
+    is_admin:0,
+    favoriteColor: 'blue',
+    moto: 'Kawasaki Ninja 1000'
   },
 ])
 
