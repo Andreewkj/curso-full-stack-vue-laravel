@@ -1,63 +1,24 @@
 <template>
-  <h2>Home</h2>
-
-  <ul>
-    <template v-for="(user, index) in users" :key="index">
-      <li v-if="user.is_admin"> {{ user.firstName }}</li>
-    </template>
-  </ul>
-
-  <h2>Not Admin</h2>
-
-  <ul>
-    <template v-for="(user, index) in usersIsNotAdmin" :key="index">
-      <li> {{ user.firstName }}</li>
-      <Profile :favoriteColor="user.favoriteColor" :moto="user.moto"/>
-
-    </template>
-  </ul>
-
+<div>
+    <button @click="openModal = true">Abrir</button>
+    
+    <Modal v-if="openModal" @close-modal="openModal = false">
+        <template #default>
+            <form action="" method="get">
+                <input type="text" name="" placeholder="Email">
+                <input type="text" name="" placeholder="Senha">
+                <button>Login</button>
+            </form>
+        </template>
+    </Modal>
+</div>
 </template>
 
 <script setup>
-import { computed, reactive, ref } from "vue";
-import Profile from "@/components/Profile.vue"
 
-const user = reactive({
-    firstName: 'Andreew',
-    lastName: 'Cardoso',
-    is_admin: true
-})
+import {ref} from 'vue';
+import Modal from '@/components/Modal.vue'
 
-const users = reactive([
-  {
-    firstName:'jenny',
-    is_admin:1
-  },
-  {
-    firstName:'Anne',
-    is_admin:0,
-    favoriteColor: 'black',
-    moto: 'Yamaha MT 03'
-  },
-  {
-    firstName:'Mary',
-    is_admin:1
-  },
-  {
-    firstName:'James',
-    is_admin:0,
-    favoriteColor: 'blue',
-    moto: 'Kawasaki Ninja 1000'
-  },
-])
-
-const fullName = computed(() => {
-  return user.firstName + ' - ' + user.lastName
-})
-
-const usersIsNotAdmin = computed(() => {
-  return users.filter((user) => user.is_admin == 0)
-})
+const openModal = ref(false);
 </script>
 
