@@ -20,6 +20,6 @@ function closeModal(){
 
 </script>
 
-<style scoped>
+<!-- <style scoped>
 @import "https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css";
-</style>
+</style> -->

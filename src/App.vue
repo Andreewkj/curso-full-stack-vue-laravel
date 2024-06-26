@@ -3,21 +3,33 @@
 
     <router-view></router-view>
 
-    <button @click="count++">add count - {{ count }}</button>
-
-    <CountChild v-on:addCount="plus" />
+    <img src="https://picsum.photos/200/300" id="img" ref="img">
+    <ul>
+      <li v-for="(product, index) in products" id="lis">{{index}}{{ product.name }}</li>
+    </ul>
 </template>
 
 <script setup>
 import Nav from '@/components/Nav.vue';
-import CountChild from '@/components/CountChild.vue';
 
-import {ref} from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 
-const count = ref(0);
+const img = ref(null);
 
-function plus(){
-    return count.value++
-}
+onMounted(() => {
+  // console.log(document.querySelector('#img'));
+  console.log(img.value['src']);
+})
+
+const products = reactive([
+  {
+    id: 1,
+    name:'Imac'
+  },
+  {
+    id:2,
+    name:'xps'
+  }
+])
 
 </script>
