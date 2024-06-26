@@ -2,34 +2,23 @@
     <Nav/>
 
     <router-view></router-view>
+    <input type="text" name="" id="" placeholder="search" @keyup="search">
+    <button>search</button>
 
-    <img src="https://picsum.photos/200/300" id="img" ref="img">
-    <ul>
-      <li v-for="(product, index) in products" id="lis">{{index}}{{ product.name }}</li>
-    </ul>
 </template>
 
 <script setup>
 import Nav from '@/components/Nav.vue';
+import _ from 'lodash';
 
 import { ref, onMounted, reactive } from 'vue';
 
-const img = ref(null);
+const search = _.debounce(() => {
+  console.log('search');
+}, 1000)
 
-onMounted(() => {
-  // console.log(document.querySelector('#img'));
-  console.log(img.value['src']);
-})
-
-const products = reactive([
-  {
-    id: 1,
-    name:'Imac'
-  },
-  {
-    id:2,
-    name:'xps'
-  }
-])
+// function search() {
+//   console.log('search');
+// }
 
 </script>
